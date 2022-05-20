@@ -15,7 +15,7 @@ public class SpectrumPipelineSettings {
 
     @Nullable
     private final SpectrumLayout<SpectrumBindable.Type> bindableTypes;
-    private final List<SpectrumLayout<SpectrumPipeline.VertexAttributeType>> vertexLayout;
+    private final List<SpectrumVertexAttributeLayout> vertexLayout;
 
     private final GeometryType geometryType;
 
@@ -26,7 +26,7 @@ public class SpectrumPipelineSettings {
      * @param vertexLayout A layout describing the vertex attributes that will be passed into the vertex shader
      * @param geometryType What kind of geometry this pipeline will be rendering
      */
-    public SpectrumPipelineSettings(@Nullable SpectrumTexture depth, SpectrumTexture output, @Nullable SpectrumLayout<SpectrumBindable.Type> bindableTypes, List<SpectrumLayout<SpectrumPipeline.VertexAttributeType>> vertexLayout, GeometryType geometryType) {
+    public SpectrumPipelineSettings(@Nullable SpectrumTexture depth, SpectrumTexture output, @Nullable SpectrumLayout<SpectrumBindable.Type> bindableTypes, List<SpectrumVertexAttributeLayout> vertexLayout, GeometryType geometryType) {
         this.depth = depth;
         this.output = output;
         this.bindableTypes = bindableTypes;
@@ -48,7 +48,7 @@ public class SpectrumPipelineSettings {
         return bindableTypes;
     }
 
-    public List<SpectrumLayout<SpectrumPipeline.VertexAttributeType>> getVertexLayout() {
+    public List<SpectrumVertexAttributeLayout> getVertexLayout() {
         return vertexLayout;
     }
 

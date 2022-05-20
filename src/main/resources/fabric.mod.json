@@ -1,29 +1,29 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
-  "version": "${version}",
+  "id": "spectrum",
+  "version": "0.1",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Spectrum",
+  "description": "A modern rendering API for mods of all kinds",
   "authors": [
-    "Me!"
+    "Birb"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://github.com/wgpu-mc/spectrum",
+    "sources": "https://github.com/wgpu-mc/spectrum"
   },
 
-  "license": "CC0-1.0",
+  "license": "LGPL3",
   "icon": "assets/modid/icon.png",
 
-  "environment": "*",
+  "environment": "client",
   "entrypoints": {
     "main": [
-      "dev.birb.gl.Spectrum"
+      "dev.birb.spectrum_gl.SpectrumMod"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "spectrum.mixins.json"
   ],
 
   "depends": {

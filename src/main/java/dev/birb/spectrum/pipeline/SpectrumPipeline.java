@@ -31,10 +31,6 @@ public interface SpectrumPipeline {
 
     SpectrumPipelineSettings getSettings();
 
-    record VertexLayout(List<SpectrumLayout<VertexAttribute>> vertexAttributes) {}
-
-    record VertexAttribute(VertexAttributeType type, int location) {}
-
     enum VertexAttributeType {
 
         Float_x1,

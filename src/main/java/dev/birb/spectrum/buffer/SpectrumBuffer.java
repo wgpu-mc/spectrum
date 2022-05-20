@@ -2,6 +2,9 @@ package dev.birb.spectrum.buffer;
 
 import dev.birb.spectrum.SpectrumRenderer;
 
+import java.nio.ByteBuffer;
+import java.util.HashSet;
+
 /**
  * Represents a contiguous section of memory on the GPU which can be used for various purposes
  */
@@ -18,14 +21,25 @@ public interface SpectrumBuffer {
      */
     SpectrumBindableBuffer createBindable() throws SpectrumRenderer.CapabilityError;
 
-    EUsage[] getUsages();
+    HashSet<Usage> getUsages();
 
-    public static enum EUsage {
+    /**
+     * Copies the data from the ByteBuffer onto the already allocated buffer on the GPU.
+     * @param buffer
+     * @throws BufferCopyError when the provided ByteBuffer is larger than the allocated buffer on the GPU, or if the buffer doesn't have the usage {@link Usage#Write} specified
+     */
+    void upload(ByteBuffer buffer) throws BufferCopyError;
+
+    public static enum Usage {
 
         SSBO,
         VertexBuffer,
         InstanceBuffer,
+        Write,
+        Read
 
     }
+
+    class BufferCopyError extends Throwable {}
 
 }

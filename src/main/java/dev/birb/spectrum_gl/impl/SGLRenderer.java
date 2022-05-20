@@ -9,19 +9,21 @@ import dev.birb.spectrum.pipeline.SpectrumShader;
 import net.minecraft.client.texture.NativeImage;
 
 import java.nio.ByteBuffer;
+import java.util.HashSet;
 
 public class SGLRenderer implements SpectrumRenderer {
 
-    private SGLTexture framebuffer;
-    private SGLTexture depthBuffer;
+    private final SpectrumTexture framebuffer;
+    private SpectrumTexture depthBuffer;
 
     public SGLRenderer() {
-//        this.framebuffer = new SGLTexture();
+        this.framebuffer = new SGLFramebufferTexture();
+        this.depthBuffer = new SGLDepthTexture();
     }
 
     @Override
-    public SpectrumPipeline createPipeline(String name, SpectrumPipelineSettings settings) {
-        return null;
+    public SpectrumPipeline createPipeline(String name, SpectrumPipelineSettings settings, SpectrumShader shader) {
+        return new SGLPipeline(settings, (SGLShader) shader);
     }
 
     @Override
@@ -39,7 +41,7 @@ public class SGLRenderer implements SpectrumRenderer {
 
             @Override
             public boolean SSBOs() {
-                return false;
+                return true;
             }
 
             @Override
@@ -59,8 +61,8 @@ public class SGLRenderer implements SpectrumRenderer {
     }
 
     @Override
-    public SpectrumBuffer createBuffer(ByteBuffer bytes) {
-        return null;
+    public SpectrumBuffer createBuffer(ByteBuffer bytes, HashSet<SpectrumBuffer.Usage> usages) {
+        return new SGLBuffer(bytes, usages);
     }
 
     @Override

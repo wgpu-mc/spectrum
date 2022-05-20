@@ -1,12 +1,9 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "net.fabricmc.example.mixin",
+  "package": "dev.birb.spectrum_gl.mixin",
   "compatibilityLevel": "JAVA_17",
-  "mixins": [
-  ],
   "client": [
-    "dev.birb.gl.mixin.ExampleMixin"
   ],
   "injectors": {
     "defaultRequire": 1

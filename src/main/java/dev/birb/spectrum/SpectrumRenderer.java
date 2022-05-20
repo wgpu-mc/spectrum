@@ -8,6 +8,7 @@ import dev.birb.spectrum.pipeline.SpectrumShader;
 import net.minecraft.client.texture.NativeImage;
 
 import java.nio.ByteBuffer;
+import java.util.HashSet;
 
 public interface SpectrumRenderer {
 
@@ -22,7 +23,8 @@ public interface SpectrumRenderer {
      */
     SpectrumPipeline createPipeline(
             String name,
-            SpectrumPipelineSettings settings
+            SpectrumPipelineSettings settings,
+            SpectrumShader shader
     );
 
     /**
@@ -34,7 +36,15 @@ public interface SpectrumRenderer {
 
     SpectrumTexture createTexture(NativeImage image);
 
-    SpectrumBuffer createBuffer(ByteBuffer bytes);
+    /**
+     * Allocates a contiguous section of memory onto the GPU and copies the contents of the ByteBuffer onto it.
+     * Do keep in mind that changes to the provided ByteBuffer are not reflected on the GPU and a manual call to re-upload data to the buffer is necessary.
+     *
+     * @param bytes The buffer to copy onto the GPU
+     * @param usages An array describing how this buffer will be used
+     * @return An opaque handle to the buffer on the GPU
+     */
+    SpectrumBuffer createBuffer(ByteBuffer bytes, HashSet<SpectrumBuffer.Usage> usages);
 
     /**
      * This is used when you want to manually create a pipeline that will draw straight to the framebuffer, such as the end of a compositor.
